@@ -1,15 +1,15 @@
 package com.profiles.clsung.api.board.controller;
 
 import com.profiles.clsung.api.board.data.entity.Board;
-import com.profiles.clsung.api.board.data.request.BoardRequestDTO;
 import com.profiles.clsung.api.board.service.BoardService;
-import com.profiles.clsung.cmm.BaseController;
+import com.profiles.clsung.cmm.base.BaseController;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +31,7 @@ public class BoardController extends BaseController {
     @Operation(summary = "게시판 목록 조회", description = "게시판 목록을 조회한다.", tags = {"Board Controller"})
     @GetMapping("/boards")
     public List<Board> selectByList(){
+        RestClient restClient = RestClient.create();
         return boardService.selectByList();
     }
 

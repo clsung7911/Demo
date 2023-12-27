@@ -1,4 +1,4 @@
-package com.profiles.clsung.cmm;
+package com.profiles.clsung.cmm.base;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

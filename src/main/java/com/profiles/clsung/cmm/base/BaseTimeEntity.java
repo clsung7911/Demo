@@ -1,4 +1,4 @@
-package com.profiles.clsung.cmm;
+package com.profiles.clsung.cmm.base;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
