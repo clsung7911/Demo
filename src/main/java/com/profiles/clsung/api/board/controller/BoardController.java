@@ -37,7 +37,6 @@ public class BoardController extends BaseController {
     @Operation(summary = "게시판 상세 조회", description = "게시판 상세 정보를 조회한다.", tags = {"Board Controller"})
     @GetMapping("/boards/{bbsId}")
     public Optional<Board> selectById(@PathVariable(value = "bbsId") String bbsId){
-
         return boardService.selectById(bbsId);
     }
 
