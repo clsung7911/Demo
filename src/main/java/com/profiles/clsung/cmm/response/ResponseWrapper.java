@@ -8,4 +8,7 @@ public class ResponseWrapper {
         return new ApiResponse<T>(HttpStatus.OK.value(), CodeMessage.SUCCESS_OK.message, data);
     }
 
+    public static ApiResponse success(){
+        return new ApiResponse(HttpStatus.OK.value(), CodeMessage.SUCCESS_OK.message);
+    }
 }
