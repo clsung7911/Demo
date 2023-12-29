@@ -3,16 +3,16 @@ package com.profiles.clsung.api.board.controller;
 import com.profiles.clsung.api.board.data.entity.Board;
 import com.profiles.clsung.api.board.service.BoardService;
 import com.profiles.clsung.cmm.base.BaseController;
+import com.profiles.clsung.cmm.error.code.CommonErrorCode;
+import com.profiles.clsung.cmm.error.exception.RestApiException;
+import com.profiles.clsung.cmm.response.ApiResponse;
+import com.profiles.clsung.cmm.response.ResponseWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -30,15 +30,19 @@ public class BoardController extends BaseController {
 
     @Operation(summary = "게시판 목록 조회", description = "게시판 목록을 조회한다.", tags = {"Board Controller"})
     @GetMapping("/boards")
-    public List<Board> selectByList(){
-        RestClient restClient = RestClient.create();
-        return boardService.selectByList();
+    public ResponseEntity<List<Board>> selectByList(){
+        return ResponseEntity.ok(boardService.selectByList());
     }
 
     @Operation(summary = "게시판 상세 조회", description = "게시판 상세 정보를 조회한다.", tags = {"Board Controller"})
     @GetMapping("/boards/{bbsId}")
-    public Optional<Board> selectById(@PathVariable(value = "bbsId") String bbsId){
-        return boardService.selectById(bbsId);
+    public ApiResponse<Board> selectById(@PathVariable(value = "bbsId") String bbsId){
+        Board board = boardService.selectById(bbsId);
+        return ResponseWrapper.success(board);
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Board> getUser() {
+        throw new RestApiException(CommonErrorCode.INTERNAL_SERVER_ERROR);
+    }
 }
