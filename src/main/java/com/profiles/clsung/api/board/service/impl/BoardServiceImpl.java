@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -39,6 +38,7 @@ public class BoardServiceImpl implements BoardService {
     public Board insertBoard(BoardRequestDTO requestDTO) throws RestApiException {
 
         Board board = requestDTO.toBoard();
+        board.setRegisterId(requestDTO.getRegisterId());
         Board saveBoard = boardRepository.save(board);
         return saveBoard;
     }
@@ -48,10 +48,9 @@ public class BoardServiceImpl implements BoardService {
     public void updateBoard(BoardUpdateRequestDTO requestDTO){
         Board board = boardRepository.findById(requestDTO.getBbsId())
                 .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+        board.setUpdusrId(requestDTO.getUpdusrId());
         board.setBbsSj(requestDTO.getBbsSj());
         board.setBbsCn(requestDTO.getBbsCn());
-        board.setUpdusrId(requestDTO.getUpdusrId());
-        board.setUpdtDt(LocalDateTime.now());
     }
 
     @Transactional
