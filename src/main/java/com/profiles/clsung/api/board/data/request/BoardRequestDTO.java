@@ -5,8 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class BoardRequestDTO {
     @NotNull(message = "게시판 ID는 필수 값 입니다.")
@@ -18,7 +16,7 @@ public class BoardRequestDTO {
 
     @Schema(name = "bbsCn", example = "게시판 내용")
     private String bbsCn;
-    
+
     @Schema(name = "useAt", example = "Y", defaultValue = "Y")
     private String useAt;
 
@@ -31,8 +29,6 @@ public class BoardRequestDTO {
                 .bbsSj(bbsSj)
                 .bbsCn(bbsCn)
                 .useAt(useAt)
-                .registerId(registerId)
-                .registDt(LocalDateTime.now())
                 .build();
         return board;
     }
